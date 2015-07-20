@@ -1,0 +1,24 @@
+{
+  "name": "extend-light",
+  "version": "0.0.0",
+  "description": "extend light",
+  "main": "extend-light.js",
+  "devDependencies": {
+    "merge-light": ">=0.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "LightSpeedWorks/extend-light"
+  },
+  "keywords": [
+    "extend",
+    "base",
+    "class",
+    "inherits"
+  ],
+  "author": "LightSpeedC",
+  "license": "MIT"
+}
