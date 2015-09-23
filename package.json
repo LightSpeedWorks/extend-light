@@ -1,6 +1,6 @@
 {
   "name": "extend-light",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "extend light",
   "main": "extend-light.js",
   "devDependencies": {
