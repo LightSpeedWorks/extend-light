@@ -1,4 +1,4 @@
-this['extend-light'] = function () {
+void function () {
 	'use strict';
 
 	// merge-light
@@ -11,8 +11,7 @@ this['extend-light'] = function () {
 	}
 
 	var setProto = Object.setPrototypeOf ||
-			({}.__proto__ = {proto:1}).proto &&
-			function setProto(obj, proto) { obj.__proto__ = proto; } || null;
+			function setProto(obj, proto) { obj.__proto__ = proto; };
 
 	function extend(proto, statics) {
 		'use strict';
@@ -31,7 +30,7 @@ this['extend-light'] = function () {
 		$ctor.prototype = ctor.prototype = merge(new $super(), proto);
 		delete ctor.prototype.statics;
 
-		if (super_ && setProto) setProto(ctor, super_);
+		if (super_) setProto(ctor, super_);
 		return merge(ctor, proto.statics, statics,
 			super_ ? {super_: super_} : undefined, super_, {extend: extend, create: create});
 	}
@@ -45,5 +44,5 @@ this['extend-light'] = function () {
 	if (typeof module === 'object' && module && module.exports)
 		module.exports = extend;
 
-	return extend;
+	Function('return this')()['extend-light'] = extend;
 }();
