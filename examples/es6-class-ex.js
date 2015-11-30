@@ -2,6 +2,7 @@
 void function () {
 	'use strict';
 
+	// Animal
 	class Animal {
 		constructor(name) {
 			this.name = name;
@@ -17,6 +18,7 @@ void function () {
 		}
 	}
 
+	// Horse
 	class Horse extends Animal {}
 
 	var a1 = new Animal('Annie');
