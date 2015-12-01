@@ -4,7 +4,7 @@
   "description": "extend light",
   "main": "extend-light.js",
   "devDependencies": {
-    "merge-light": ">=0.0.1"
+    "merge-light": ">=0.0.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
