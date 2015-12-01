@@ -12,9 +12,7 @@ void function () {
 			this.constructor.introduce();
 		}
 		static introduce() {
-			console.log('I am ' +
-				('AIUEO'.indexOf(this.name[0]) >= 0 ? 'an ' : 'a ') +
-				this.name + '.');
+			console.log('I am one of ' + this.name + '.');
 		}
 	}
 
@@ -35,6 +33,7 @@ void function () {
 	assert(h1.constructor.name === 'Horse', 'h1.constructor.name != "Horse"');
 	assert(h1.name === 'Deep Impact', 'h1.name != "Deep Impact"');
 
+	// assert
 	function assert(bool, msg) { if (!bool) throw new Error(msg); }
 
 }();

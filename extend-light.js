@@ -1,20 +1,13 @@
 void function () {
 	'use strict';
 
-	// merge-light
-	function merge(dst, src) {
-		for (var i = 1; src = arguments[i], i < arguments.length; ++i)
-			for (var p in src)
-				if (src.hasOwnProperty(p) && !dst.hasOwnProperty(p) &&
-						dst[p] !== src[p]) dst[p] = src[p];
-		return dst;
-	}
-
 	var setProto = Object.setPrototypeOf ||
 			function setProto(obj, proto) { obj.__proto__ = proto; };
 
-	function extend(proto, statics) {
+	// extend-light
+	function extend(name, proto, statics) {
 		'use strict';
+		if (typeof name !== 'string') statics = proto, proto = name;
 		proto = proto || {};
 		var super_ = typeof this === 'function' ? this : undefined;
 
@@ -31,14 +24,25 @@ void function () {
 		delete ctor.prototype.statics;
 
 		if (super_) setProto(ctor, super_);
+		if (typeof name === 'string') try { ctor.name = name; } catch (e) {} // for old IE
 		return merge(ctor, proto.statics, statics,
 			super_ ? {super_: super_} : undefined, super_, {extend: extend, create: create});
 	}
 
+	// create
 	function create() {
 		function $ctor() {}
 		$ctor.prototype = this.prototype;
 		return this.apply(new $ctor(), arguments);
+	}
+
+	// merge-light
+	function merge(dst, src) {
+		for (var i = 1; src = arguments[i], i < arguments.length; ++i)
+			for (var p in src)
+				if (src.hasOwnProperty(p) && !dst.hasOwnProperty(p) &&
+						dst[p] !== src[p]) dst[p] = src[p];
+		return dst;
 	}
 
 	if (typeof module === 'object' && module && module.exports)

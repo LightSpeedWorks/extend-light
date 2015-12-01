@@ -11,12 +11,9 @@ void function () {
 			console.log('Hello, my name is ' + this.name + '.');
 			this.constructor.introduce();
 		}
-	},
-	{
+	}, { // static
 		introduce: function introduce() {
-			console.log('I am ' +
-				('AIUEO'.indexOf(this.name[0]) >= 0 ? 'an ' : 'a ') +
-				this.name + '.');
+			console.log('I am one of ' + this.name + '.');
 		}
 	});
 
@@ -41,23 +38,31 @@ void function () {
 	assert(h1.constructor.name === 'Horse', 'h1.constructor.name != "Horse"');
 	assert(h1.name === 'Deep Impact', 'h1.name != "Deep Impact"');
 
+	// extend-light
 	function extend(name, proto, statics) {
-		var super_ = this || null;
+		if (typeof name !== 'string') statics = proto, proto = name;
+		var super_ = typeof this === 'function' ? this : null;
 		var ctor = proto.constructor;
-
 		function SuperClass() { this.constructor = ctor; }
-		if (super_) SuperClass.prototype = super_.prototype;
-		ctor.prototype = new SuperClass();
-
-		for (var p in proto) if (!ctor.prototype.hasOwnProperty(p)) ctor.prototype[p] = proto[p];
-		for (var p in statics) if (!ctor.hasOwnProperty(p)) ctor[p] = statics[p];
-		for (var p in super_) if (!ctor.hasOwnProperty(p)) ctor[p] = super_[p];
-		if (ctor.extend !== extend) ctor.extend = extend;
-
-		try { ctor.name = name; } catch (e) {}
-		return ctor;
+		if (super_) {
+			SuperClass.prototype = super_.prototype;
+			ctor.prototype = merge(new SuperClass(), proto);
+		} else merge(ctor.prototype, proto);
+		if (typeof name === 'string') try { ctor.name = name; } catch (e) {} // for old IE
+		return merge(ctor, statics,
+			super_ ? {super_: super_} : undefined, super_, {extend: extend});
 	}
 
+	// merge-light
+	function merge(dst, src) {
+		for (var i = 1; src = arguments[i], i < arguments.length; ++i)
+			for (var p in src)
+				if (src.hasOwnProperty(p) && !dst.hasOwnProperty(p) &&
+						dst[p] !== src[p]) dst[p] = src[p];
+		return dst;
+	}
+
+	// assert
 	function assert(bool, msg) { if (!bool) throw new Error(msg); }
 
 }();
