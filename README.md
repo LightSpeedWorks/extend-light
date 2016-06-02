@@ -54,7 +54,7 @@ var YourSubClass = YourClass.extend([proto], [staticProps]);
 
   + **BaseClass**: Base class or Super class for inherits
   + **proto**: the prototype object for your class, optional
-    + **constructor** or **new**: constructor function, optional
+    + **constructor**: constructor function, optional
     + **any methods**: any method or member function, optional
     + **statics**: the object for class or static properties, optional
       + **any methods**: any method or member function, optional

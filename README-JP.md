@@ -53,7 +53,7 @@ var YourSubClass = YourClass.extend([proto], [staticProps]);
 
   + **BaseClass**: 継承のための基底クラスまたはスーパークラス
   + **proto**: 新しいクラスのプロトタイプオブジェクト (省略可)
-    + **constructor** または **new**: コンストラクタ関数 (省略可)
+    + **constructor**: コンストラクタ関数 (省略可)
     + **any methods**: メソッドまたはメンバー関数 (省略可)
     + **statics**: クラス／静的プロパティのオブジェクト (省略可)
       + **any methods**: メソッドまたはメンバー関数 (省略可)
